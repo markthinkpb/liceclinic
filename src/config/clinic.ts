@@ -12,6 +12,9 @@ export interface ClinicConfig {
   // NEW: public site
   website?: string;
 
+  //NEW:
+  mainArea?: string;
+
   // NEW: areas served
   areasServed?: string[];
 
@@ -77,6 +80,8 @@ export const clinicConfig: ClinicConfig = {
 
   // NEW
   website: "https://www.licetreatment.com",
+
+  mainArea: "Downtown",
 
   // NEW
   areasServed: [
