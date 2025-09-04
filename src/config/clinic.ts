@@ -1,6 +1,6 @@
-// If you have a logo inside /src/assets, import it like this:
+// /src/config/clinic.ts
 import clinicLogo from "@/assets/logo.png";
-import networkBadge from "@/assets/network-badge.png"; // ← add your badge image here
+import networkBadge from "@/assets/network-badge.png";
 
 export interface ClinicConfig {
   clinicName: string;
@@ -9,13 +9,9 @@ export interface ClinicConfig {
   phone: string;
   email: string;
 
-  // NEW: public site
   website?: string;
-
-  //NEW:
   mainArea?: string;
 
-  // NEW: areas served
   areasServed?: string[];
 
   locations: Array<{
@@ -36,8 +32,18 @@ export interface ClinicConfig {
   };
 
   bookingForm: {
-    fields: Array<'firstName' | 'lastName' | 'email' | 'phone' | 'location' | 'date' | 'householdSize' | 'notes'>;
-    submitUrl: string;
+    fields: Array<
+      | "firstName"
+      | "lastName"
+      | "email"
+      | "phone"
+      | "location"
+      | "date"
+      | "householdSize"
+      | "notes"
+    >;
+    /** Leave blank to use Web3Forms fallback */
+    submitUrl: string; // <- keep as empty string
     requiresLocation: boolean;
   };
 
@@ -52,20 +58,17 @@ export interface ClinicConfig {
     networkName: string;
     memberId?: string;
     memberSince?: number;
-    certificationLevel?: 'certified' | 'verified' | 'premium';
+    certificationLevel?: "certified" | "verified" | "premium";
     showBadge: boolean;
     showStats: boolean;
     localArea: string;
     certificationBlurb: string;
-    // NEW: badge image for use in footer
     badgeImage?: string;
   };
 
   legal?: {
     privacy?: {
-      /** ISO date string like "2025-08-29" or any human-readable date */
       effectiveDate?: string;
-      /** Simple text or a URL describing where this policy derives from */
       source?: string;
     };
   };
@@ -78,18 +81,10 @@ export const clinicConfig: ClinicConfig = {
   phone: "(555) 123-4567",
   email: "info@licetreatment.com",
 
-  // NEW
   website: "https://www.licetreatment.com",
-
   mainArea: "Downtown",
 
-  // NEW
-  areasServed: [
-    "Downtown",
-    "Northside",
-    "Riverside",
-    "West Valley",
-  ],
+  areasServed: ["Downtown", "Northside", "Riverside", "West Valley"],
 
   locations: [
     {
@@ -112,7 +107,7 @@ export const clinicConfig: ClinicConfig = {
 
   bookingForm: {
     fields: ["firstName", "lastName", "email", "phone", "location", "date", "householdSize"],
-    submitUrl: "/api/book-appointment",
+    submitUrl: "",             // ⬅️ turn OFF custom endpoint
     requiresLocation: true,
   },
 
@@ -126,14 +121,13 @@ export const clinicConfig: ClinicConfig = {
     showStats: true,
     localArea: "Area Name",
     certificationBlurb: "Lice Removal Professional",
-    // NEW
     badgeImage: networkBadge,
   },
 
   legal: {
     privacy: {
-      effectiveDate: "2025-08-29",          // ← set your actual date
-      source: "Firstrive standard template" // ← text or a URL
-    }
-  }
+      effectiveDate: "2025-08-29",
+      source: "Firstrive standard template",
+    },
+  },
 };
